@@ -1,0 +1,8 @@
+.idea/
+*.iml
+kyu*/target/
+kyu*/src/main/resources
+kyu*/src/main/test
+kyu*/*.class
+kyu*/pom.xml
+
