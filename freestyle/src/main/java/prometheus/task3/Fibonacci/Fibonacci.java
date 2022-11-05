@@ -1,3 +1,5 @@
+package prometheus.task3.Fibonacci;
+
 public class Fibonacci
 {
     private static long getNumber(int position) {
@@ -6,7 +8,7 @@ public class Fibonacci
         return getNumber(position - 1) + getNumber(position - 2);
     }
 
-    public static void main(String[] args) {
+   public static void main(String[] args) {
 
         System.out.println(getNumber(-1));
         System.out.println(getNumber(0));

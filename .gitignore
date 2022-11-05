@@ -1,12 +1,12 @@
 .idea/
 *.iml
-kyu*/target/
+kyu*/target/*
 kyu*/src/main/resources
 kyu*/src/main/test
 kyu*/*.class
 kyu*/pom.xml
 
-freestyle/target/
+freestyle/target/*
 freestyle/src/main/resources
 freestyle/src/main/test
 freestyle/*.class
