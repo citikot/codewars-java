@@ -4,7 +4,9 @@ class Node{
     private Node next;
     private Integer data;
 
-    public Node() {
+    public Node(Integer data) {
+        setData(data);
+        this.next = null;
     }
 
     public Node getNext() {
