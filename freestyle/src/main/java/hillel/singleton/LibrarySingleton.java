@@ -12,19 +12,23 @@ public class LibrarySingleton {
     private LibrarySingleton() {
     }
 
-    public static LibrarySingleton getInstance(){
+    public static LibrarySingleton getInstance() {
         if (instance == null) {
-            instance = new LibrarySingleton();
+            synchronized (LibrarySingleton.class) {
+                if (instance == null) {
+                    instance = new LibrarySingleton();
+                }
+            }
         }
         return instance;
     }
 
-    public void addDirectory(String... directory){
+    public void addDirectory(String... directory) {
         directories.addAll(Arrays.stream(directory).toList());
         System.out.println("Directories Added: " + directories);
     }
 
-    public boolean removeDirectory(String directory){
+    public boolean removeDirectory(String directory) {
         boolean result = directories.remove(directory);
         System.out.println("Directories Removed: " + directories);
         return result;
