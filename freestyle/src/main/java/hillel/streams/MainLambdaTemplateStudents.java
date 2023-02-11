@@ -1,8 +1,10 @@
 package hillel.streams;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static hillel.streams.FruitType.APPLE;
 import static hillel.streams.FruitType.ORANGE;
@@ -23,13 +25,71 @@ import static hillel.streams.Vitamin.P;
 public class MainLambdaTemplateStudents {
     public static void main(String[] args) {
         List<Fruit> fruits = fillFruitsList();
-//        fruits.forEach(System.out::println);
+
+        System.out.println("List of fruits:");
+        fruits.forEach(System.out::println);
+        System.out.println("***");
 
         fruits.stream()
                 .filter(fruit -> PEAR.equals(fruit.getFruitType()))
                 .filter(fruit -> fruit.getPrice() > 10)
                 .forEach(System.out::println);
 
+        System.out.println("***");
+
+        Fruit fruit = fruits.stream()
+                .max((fruit1, fruit2) -> fruit1.getVitamins().size() - fruit2.getVitamins().size())
+                .get();
+
+        System.out.println(fruit);
+
+        System.out.println("***");
+
+        System.out.println(fruits.stream()
+                .anyMatch(elem -> ORANGE.equals(elem.getFruitType())) ? "Oranges exist" : "Oranges are absent");
+
+        System.out.println("***");
+
+        fruits.stream()
+                .flatMap(elem -> elem.getVitamins().stream())
+                .distinct()
+                .sorted()
+                .forEach(System.out::println);
+
+        System.out.println("***");
+
+        TreeMap<FruitType, Fruit> fruitTypeMap = fruits.stream()
+                .filter(fr -> APPLE != fr.getFruitType())
+                .collect(Collectors.toMap(Fruit::getFruitType,
+                        Function.identity(),
+                        mergeFruitsByCountVitamins(),
+                        TreeMap::new));
+
+        System.out.println(fruitTypeMap);
+
+        System.out.println("***");
+
+        TreeMap<FruitType, Fruit> fruitTypeMap1 = fruits.stream()
+                .filter(fr -> APPLE != fr.getFruitType())
+                .sorted(Comparator.comparingInt(fr -> fr.getVitamins().size()))
+                .collect(Collectors.toMap(Fruit::getFruitType,
+                        Function.identity(),
+                        (fr1, fr2) -> fr2,
+                        TreeMap::new));
+
+
+        System.out.println(fruitTypeMap1);
+
+    }
+
+    private static BinaryOperator<Fruit> mergeFruitsByCountVitamins() {
+        return (fr1, fr2) -> {
+            if (fr1.getVitamins().size() >= fr2.getVitamins().size()) {
+                return fr1;
+            } else {
+                return fr2;
+            }
+        };
     }
 
     private static List<Fruit> fillFruitsList() {
