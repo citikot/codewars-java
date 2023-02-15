@@ -1,23 +1,16 @@
 package hillel.streams;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.TreeMap;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static hillel.streams.FruitType.APPLE;
-import static hillel.streams.FruitType.ORANGE;
-import static hillel.streams.FruitType.PEAR;
-import static hillel.streams.FruitType.STRAWBERRY;
-import static hillel.streams.Vitamin.A;
-import static hillel.streams.Vitamin.B;
-import static hillel.streams.Vitamin.B1;
-import static hillel.streams.Vitamin.B2;
-import static hillel.streams.Vitamin.C;
-import static hillel.streams.Vitamin.D;
-import static hillel.streams.Vitamin.E;
-import static hillel.streams.Vitamin.P;
+import static hillel.streams.FruitType.*;
+import static hillel.streams.Vitamin.*;
 
 /**
  * @author spasko
